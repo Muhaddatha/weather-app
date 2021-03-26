@@ -17,7 +17,7 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var requestQueue : RequestQueue
+    public lateinit var requestQueue : RequestQueue
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,43 +31,43 @@ class MainActivity : AppCompatActivity() {
         //instantiate the request queue
         requestQueue = Volley.newRequestQueue(this)
 
+        // current weather json object
+        var currentWeather : JSONObject
+
+        // json array of weather objects for the next 8 days
+        var daily : JSONArray
+
         //api url
-        var url : String = "https://google.com"
+        val url : String = "https://api.openweathermap.org/data/2.5/onecall?lat=42.3314&lon=-83.0458&exclude=minutely,hourly,alerts&units=imperial&appid="
 
         //create object request
         var jsonObjectRequest : JsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
          Response.Listener<JSONObject>(){
+             //json object that we get back from the api call
+             response ->
 
-             fun onResponse(response : JSONObject){ // REMOVED OVERRIDE
                  //this prints the whole string
-                 //Log.i("JSON response, response.toString())
+                 Log.i("JSON response", response.toString())
 
                  try {
-                     // get description of weather
-                     var weather : JSONArray = response.getJSONArray("weather")
+                     // get description of current and daily (7 day) weather
+                     currentWeather = response.getJSONObject("current")
+                     daily = response.getJSONArray("daily")
 
-                     // since it's one day of weather,
-                     // there's one object in the array
-                     var currentWeather : JSONObject = weather.getJSONObject(0)
+                     Log.i("JSON response", "current: " + currentWeather.toString())
 
-                     var id : Int = currentWeather.getInt("id")
-                     var mainWeather : String = currentWeather.getString("main")
-                     var description : String = currentWeather.getString("description")
+                     for(i in 0 .. 6){
+                        Log.i("JSON response", "daily[$i]: " + daily.getJSONObject(i).toString())
+                     }
 
-                     Log.i("JSON info", "ID: $id")
-                     Log.i("JSON info", "main weather: $mainWeather")
-                     Log.i("JSON info", "Description: $description")
                  }
                  catch(ex : JSONException) {
                      Log.e("JSON Error", ex.localizedMessage)
                  }
-             }
-
          },
         Response.ErrorListener(){
-            fun onErrorResponse(error : VolleyError) { // REMOVED OVERRIDE
+            error ->
                 Log.e("JSON Error", error.localizedMessage)
-            }
         }) // end of JSON object request
 
         requestQueue.add(jsonObjectRequest)
