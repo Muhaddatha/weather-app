@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.weatherapp.R
+import kotlinx.android.synthetic.main.main_fragment.*
+import org.json.JSONObject
 
 class MainFragment : Fragment() {
 
@@ -24,7 +26,18 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        var currentWeather : JSONObject
+
+        try {
+            currentWeather = viewModel.getCurrentWeather()
+            message.text = currentWeather.toString()
+        }
+        catch (ex : NullPointerException){
+            message.text = "Null pointer"
+        }
+
+
+        //textView.text = viewModel.getDailyWeather().toString()
     }
 
 }
