@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
             message.text = currentWeather.toString() // Not working
         }
         catch (ex : NullPointerException){
-            message.text = "Null pointer"
+            message.text = "Null pointer" // Not executing
         }
 
 
