@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
 
         try {
             currentWeather = viewModel.getCurrentWeather()
-            message.text = currentWeather.toString()
+            message.text = currentWeather.toString() // Not working
         }
         catch (ex : NullPointerException){
             message.text = "Null pointer"
