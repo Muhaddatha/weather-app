@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import org.json.JSONObject
 
 class MainFragment : Fragment() {
-    // comment test
+
     companion object {
         fun newInstance() = MainFragment()
     }
@@ -30,13 +30,13 @@ class MainFragment : Fragment() {
 
         try {
             currentWeather = viewModel.getCurrentWeather()
-            message.text = currentWeather.toString() // Not working
+            message.text = currentWeather.toString()
         }
         catch (ex : NullPointerException){
-            message.text = "Null pointer" // Not executing
+            message.text = "Null pointer"
         }
 
-        // hElLoOoOoO
+
 
         //textView.text = viewModel.getDailyWeather().toString()
     }
