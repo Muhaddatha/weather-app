@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import org.json.JSONObject
 
 class MainFragment : Fragment() {
-
+    // comment test
     companion object {
         fun newInstance() = MainFragment()
     }
