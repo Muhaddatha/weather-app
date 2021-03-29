@@ -39,18 +39,19 @@ class MainActivity : AppCompatActivity() {
         //api url
         val url : String = "https://api.openweathermap.org/data/2.5/onecall?lat=42.3314&lon=-83.0458&exclude=minutely,hourly,alerts&units=imperial&appid="
 
+
         //create object request
         var jsonObjectRequest : JsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
          Response.Listener<JSONObject>(){
              //json object that we get back from the api call
              response ->
 
-                 try {
-                     viewModel.sendData(response) // send json response object to MainViewModel
-                 }
-                 catch(ex : JSONException) {
-                     Log.e("JSON Error", ex.localizedMessage)
-                 }
+//                 try {
+//                     viewModel.sendData(response) // send json response object to MainViewModel
+//                 }
+//                 catch(ex : JSONException) {
+//                     Log.e("JSON Error", ex.localizedMessage)
+//                 }
          },
         Response.ErrorListener(){
             error ->
