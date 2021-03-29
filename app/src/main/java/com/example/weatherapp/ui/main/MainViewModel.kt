@@ -7,7 +7,6 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class MainViewModel : ViewModel() {
-    //hello
 
     // current weather json object
     private lateinit var currentWeather : JSONObject
