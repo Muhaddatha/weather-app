@@ -46,12 +46,12 @@ class MainActivity : AppCompatActivity() {
              //json object that we get back from the api call
              response ->
 
-//                 try {
-//                     viewModel.sendData(response) // send json response object to MainViewModel
-//                 }
-//                 catch(ex : JSONException) {
-//                     Log.e("JSON Error", ex.localizedMessage)
-//                 }
+                 try {
+                     viewModel.sendData(response) // send json response object to MainViewModel
+                 }
+                 catch(ex : JSONException) {
+                     Log.e("JSON Error", ex.localizedMessage)
+                 }
          },
         Response.ErrorListener(){
             error ->

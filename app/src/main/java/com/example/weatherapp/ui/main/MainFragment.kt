@@ -30,19 +30,16 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        var currentWeather : JSONObject
 
-//        try {
-////            currentWeather = viewModel.getCurrentWeather()
-////            message.text = currentWeather.toString() // Not working
-//        }
-//        catch (ex: Exception){ //changed from NullPointerException to Exception
-//            //Log.i("failed", ex.localizedMessage)
-//
-//            message.text = "Null pointer" // Not executing
-//        }
-//hi
-        // hElLoOoOoO
+        try {
+            var currentW = viewModel.getCurrentWeather()
+            message.text = currentW.toString() // Not working
+        }
+        catch (ex: Exception){ //changed from NullPointerException to Exception
+            //Log.i("failed", ex.localizedMessage)
+
+            message.text = ex.localizedMessage // Not executing
+        }
 
         //textView.text = viewModel.getDailyWeather().toString()
     }
