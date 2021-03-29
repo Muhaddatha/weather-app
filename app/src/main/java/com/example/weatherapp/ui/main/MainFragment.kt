@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
 //
 //            message.text = "Null pointer" // Not executing
 //        }
-
+//hi
         // hElLoOoOoO
 
         //textView.text = viewModel.getDailyWeather().toString()
