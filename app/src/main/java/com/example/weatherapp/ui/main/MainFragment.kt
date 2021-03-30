@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
 
         try {
             var currentW = viewModel.getCurrentWeather()
-            message.text = currentW.toString() // Not working
+            message.text = currentW // Not working
         }
         catch (ex: Exception){ //changed from NullPointerException to Exception
             //Log.i("failed", ex.localizedMessage)

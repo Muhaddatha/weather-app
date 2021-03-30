@@ -9,7 +9,8 @@ import org.json.JSONObject
 class MainViewModel : ViewModel() {
 
     // current weather json object
-    private lateinit var currentWeather : JSONObject
+    //private lateinit var currentWeather : JSONObject
+    private var currentWeather : String = ""
 
     // json array of weather objects for the next 8 days
     private lateinit var daily : JSONArray
@@ -20,7 +21,7 @@ class MainViewModel : ViewModel() {
 
         try {
             // get description of current and daily (7 day) weather
-            currentWeather = response.getJSONObject("current")
+            currentWeather = response.getJSONObject("current").toString()
             daily = response.getJSONArray("daily")
 
             Log.i("JSON response in ViewModel", "current: " + currentWeather.toString())
@@ -36,8 +37,14 @@ class MainViewModel : ViewModel() {
     }
 
     // Returns current weather JSON object
-    fun getCurrentWeather(): JSONObject {
-        return currentWeather
+    fun getCurrentWeather(): String {
+        if (currentWeather.toString() == "") {
+            return "empty"
+        }
+        else {
+            return currentWeather.toString()
+        }
+
     }
 
     // Returns daily weather JSON array
