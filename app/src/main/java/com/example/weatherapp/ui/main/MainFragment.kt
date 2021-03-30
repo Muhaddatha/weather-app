@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.weatherapp.R
 import kotlinx.android.synthetic.main.main_fragment.*
 import org.json.JSONException
@@ -31,14 +32,24 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        val currentWeatherObserver = Observer<String>{
+            currentWeatherLiveData -> message.text = currentWeatherLiveData.toString()
+        }
+
+        viewModel.getCurrentWeather().observe(viewLifecycleOwner, currentWeatherObserver)
+
+        button.setOnClickListener {
+            viewModel.setCurrentWeather()
+        }
+
         try {
-            var currentW = viewModel.getCurrentWeather()
-            message.text = currentW // Not working
+            //var currentW = viewModel.getCurrentWeather()
+           // message.text = currentW // Not working
         }
         catch (ex: Exception){ //changed from NullPointerException to Exception
             //Log.i("failed", ex.localizedMessage)
 
-            message.text = ex.localizedMessage // Not executing
+            //message.text = ex.localizedMessage // Not executing
         }
 
         //textView.text = viewModel.getDailyWeather().toString()
