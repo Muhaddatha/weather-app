@@ -7,21 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
 import kotlinx.android.synthetic.main.main_fragment.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.lang.ClassCastException
-import kotlin.Exception
 
 class MainFragment : Fragment() {
-    // comment test
+    private lateinit var viewModel: MainViewModel
+
     companion object {
         fun newInstance() = MainFragment()
     }
-
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -30,29 +25,16 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        val currentWeatherObserver = Observer<String>{
-            currentWeatherLiveData -> message.text = currentWeatherLiveData.toString()
-        }
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java) // Get reference to MainViewModel
 
-        viewModel.getCurrentWeather().observe(viewLifecycleOwner, currentWeatherObserver)
+        Log.i("test", "data in MainFragment: " + (activity as MainActivity).resp.toString())
+        viewModel.sendData((activity as MainActivity).resp) // Send JSON response object to MainViewModel for parsing
+        Log.i("test", "data2 in MainFragment: " + viewModel.getCurrentWeather().toString())
 
-        button.setOnClickListener {
-            viewModel.setCurrentWeather()
-        }
+        message.text = viewModel.getCurrentWeather().toString()
+        textView.text = viewModel.getDailyWeather().toString()
 
-        try {
-            //var currentW = viewModel.getCurrentWeather()
-           // message.text = currentW // Not working
-        }
-        catch (ex: Exception){ //changed from NullPointerException to Exception
-            //Log.i("failed", ex.localizedMessage)
+    } // end of onActivityCreated
 
-            //message.text = ex.localizedMessage // Not executing
-        }
-
-        //textView.text = viewModel.getDailyWeather().toString()
-    }
-
-}
+} // end of MainFragment
