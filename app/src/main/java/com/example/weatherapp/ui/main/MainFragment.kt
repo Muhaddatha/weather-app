@@ -32,9 +32,18 @@ class MainFragment : Fragment() {
         viewModel.sendData((activity as MainActivity).resp) // Send JSON response object to MainViewModel for parsing
         Log.i("test", "data2 in MainFragment: " + viewModel.getCurrentWeather().toString())
 
-        message.text = viewModel.getCurrentWeather().toString()
-        textView.text = viewModel.getDailyWeather().toString()
-
+        if(viewModel.getCurrentWeather() == null){
+            message.text = ""
+        }
+        else{
+            message.text = viewModel.getCurrentWeather().toString()
+        }
+        if(viewModel.getDailyWeather() == null){
+            textView.text = ""
+        }
+        else {
+            textView.text = viewModel.getDailyWeather().toString()
+        }
     } // end of onActivityCreated
 
 } // end of MainFragment
