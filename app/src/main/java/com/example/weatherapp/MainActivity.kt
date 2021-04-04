@@ -9,11 +9,14 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.Response
+import android.net.Uri
+import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.main_activity.*
 
 import org.json.JSONException
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SecondFragment.OnFragmentInteractionListener {
 
     private lateinit var requestQueue : RequestQueue
     var resp: JSONObject? = null // Public variable to access JSON object response outside of class
@@ -56,5 +59,13 @@ class MainActivity : AppCompatActivity() {
 
         requestQueue.add(jsonObjectRequest)
 
+//        button.setOnClickListener {
+//            button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.mainToSecond, null))
+//        }
+
     } // end of onCreate()
+
+    override fun onFragmentInteraction(uri: Uri){
+
+    }
 } // end of MainActivity
