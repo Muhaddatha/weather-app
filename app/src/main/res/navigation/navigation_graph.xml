@@ -9,10 +9,18 @@
         android:id="@+id/mainFragment"
         android:name="com.example.weatherapp.ui.main.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/mainToSecond"
+            app:destination="@id/secondFragment" />
+    </fragment>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.weatherapp.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_second" >
+        <action
+            android:id="@+id/secondToMain"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
