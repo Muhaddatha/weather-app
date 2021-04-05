@@ -45,12 +45,12 @@ class MainActivity : AppCompatActivity(), SecondFragment.OnFragmentInteractionLi
                         Log.e("JSON Error", ex.toString())
                     }
 
-                    if (savedInstanceState == null) { // Moved fragment replacement to occur after API call
-                        supportFragmentManager.beginTransaction()
-                                .replace(R.id.container, MainFragment.newInstance())
-                                .commitNow()
-                        Log.i("test", "Replace with fragment in MainActivity")
-                    }
+//                    if (savedInstanceState == null) { // Moved fragment replacement to occur after API call
+//                        supportFragmentManager.beginTransaction()
+//                                .replace(R.id.container, MainFragment.newInstance())
+//                                .commitNow()
+//                        Log.i("test", "Replace with fragment in MainActivity")
+//                    }
                 },
                 Response.ErrorListener {
                     error ->
