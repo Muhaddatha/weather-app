@@ -8,9 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.android.volley.Request
+//import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
+//import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.weatherapp.MainActivity
@@ -20,11 +20,13 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.lang.Exception
 import java.lang.IllegalStateException
+import okhttp3.Request
+import okhttp3.*
 
 class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
 //    private lateinit var requestQueue : RequestQueue
-//    var resp: JSONObject? = null // Public variable to access JSON object response outside of class
+    var resp: Response? = null  // Public variable to access JSON object response outside of class
 
     companion object {
         fun newInstance() = MainFragment()
@@ -35,7 +37,12 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java) // Get reference to MainViewModel
+        resp = viewModel.makeAPICall()
+        Log.i("test", "data in MainFragment: " + resp.toString())
+        viewModel.sendData(resp) // Send JSON response object to MainViewModel for parsing
         super.onActivityCreated(savedInstanceState)
 
         //instantiate the request queue
@@ -72,29 +79,26 @@ class MainFragment : Fragment() {
 //
 //        requestQueue.add(jsonObjectRequest)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java) // Get reference to MainViewModel
 
-        Log.i("test", "data in MainFragment: " + (activity as MainActivity).resp.toString())
-        viewModel.sendData((activity as MainActivity).resp) // Send JSON response object to MainViewModel for parsing
+
+
         Log.i("test", "data2 in MainFragment: " + viewModel.getCurrentWeather().toString())
-
-        if(viewModel.getCurrentWeather() == null){
-            message.text = ""
-        }
-        else{
+//
+//        if(viewModel.getCurrentWeather() == null){
+//            message.text = ""
+//        }
+//        else{
             message.text = viewModel.getCurrentWeather().toString()
-        }
-        if(viewModel.getDailyWeather() == null){
-            textView.text = ""
-        }
-        else {
+//        }
+//        if(viewModel.getDailyWeather() == null){
+//            textView.text = ""
+//        }
+//        else {
             textView.text = viewModel.getDailyWeather().toString()
-        }
+//        }
 
-        if (message.text == "") {
-            ourButton.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.mainToSecond)
-            }
+        ourButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.mainToSecond)
         }
 //        try{
 //            ourButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.mainToSecond, null))
