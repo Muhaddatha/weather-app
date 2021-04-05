@@ -78,24 +78,24 @@ class MainFragment : Fragment() {
         viewModel.sendData((activity as MainActivity).resp) // Send JSON response object to MainViewModel for parsing
         Log.i("test", "data2 in MainFragment: " + viewModel.getCurrentWeather().toString())
 
-        if(viewModel.getCurrentWeather() == null){
-            message.text = ""
-        }
-        else{
+//        if(viewModel.getCurrentWeather() == null){
+//            message.text = ""
+//        }
+//        else{
             message.text = viewModel.getCurrentWeather().toString()
-        }
-        if(viewModel.getDailyWeather() == null){
-            textView.text = ""
-        }
-        else {
+//        }
+//        if(viewModel.getDailyWeather() == null){
+//            textView.text = ""
+//        }
+//        else {
             textView.text = viewModel.getDailyWeather().toString()
-        }
+//        }
 
-        if (message.text == "") {
+//        if (message.text == "") {
             ourButton.setOnClickListener {
                 Navigation.findNavController(it).navigate(R.id.mainToSecond)
             }
-        }
+//        }
 //        try{
 //            ourButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.mainToSecond, null))
 //        }catch (e: Exception){
