@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#FFFFFF"
+    android:background="@drawable/gradient_bg"
     tools:context=".ui.main.MainFragment">
 
     <TextView
