@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.net.Uri
+import android.util.Log
+import androidx.lifecycle.ViewModelProvider
+import com.example.weatherapp.ui.main.MainViewModel
+import kotlinx.android.synthetic.main.fragment_second.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +25,8 @@ class SecondFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -29,6 +34,23 @@ class SecondFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
+    // Added to allow daily weather data display
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java) // Get reference to MainViewModel
+
+        Log.i("test", "data in SecondFragment: " + (activity as MainActivity).resp.toString())
+        viewModel.sendData((activity as MainActivity).resp) // Send JSON response object to MainViewModel for parsing
+        Log.i("test", "data2 in SecondFragment: " + viewModel.getDailyWeather().toString())
+
+        testTextView.text = viewModel.getDailyWeather().toString()
+
+        currentWeatherBtn.setOnClickListener {// Change to MainFragment from SecondFragment on button click
+            (activity as MainActivity).changeFragment(id, "secondFragment")
+        }
+    } // end of onActivityCreated()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -56,7 +78,4 @@ class SecondFragment : Fragment() {
                 }
     }
 
-    interface OnFragmentInteractionListener{
-        fun onFragmentInteraction(uri: Uri)
-    }
-}
+} // end of SecondFragment
