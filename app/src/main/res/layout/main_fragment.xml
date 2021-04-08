@@ -8,30 +8,6 @@
     android:background="@drawable/gradient_bg"
     tools:context=".ui.main.MainFragment">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="#E8665D">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/currentWeatherTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:text="@string/current_weather" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/sevenDayTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/_7_day_weather" />
-    </com.google.android.material.tabs.TabLayout>
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -40,28 +16,29 @@
         app:layout_constraintBottom_toTopOf="@+id/tempInfoTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"></Space>
 
         <TextView
-            android:gravity="center"
             android:id="@+id/locationTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/location" />
 
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"></Space>
+
         <TextView
-            android:gravity="center"
             android:id="@+id/updatedAtTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/updatedAtTextView" />
 
 
@@ -286,6 +263,34 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <Button
+            android:id="@+id/currentWeatherButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:text="Current Weather"
+            android:backgroundTint="@color/sky_blue"/>
+
+        <Button
+            android:id="@+id/sevenDayWeatherButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:text="7 Day Weather"
+            android:backgroundTint="@color/coral_pink"/>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

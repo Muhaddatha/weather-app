@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayout.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -32,12 +35,16 @@ class MainFragment : Fragment() {
         viewModel.sendData((activity as MainActivity).resp) // Send JSON response object to MainViewModel for parsing
         Log.i("test", "data2 in MainFragment: " + viewModel.getCurrentWeather().toString())
 
-        message.text = viewModel.getCurrentWeather().toString()
-
-        ourButton.setOnClickListener { // Change to SecondFragment from MainFragment on button click
-            (activity as MainActivity).changeFragment(id, "mainFragment")
+        sevenDayWeatherButton.setOnClickListener {
+            handleSevenDayTab(it)
         }
+
 
     } // end of onActivityCreated
 
+    private fun handleSevenDayTab(view : View){
+        Log.i("test", "insideHandleSevenDayTab click event")
+        (activity as MainActivity).changeFragment(this.id, "mainFragment")
+
+    }
 } // end of MainFragment
