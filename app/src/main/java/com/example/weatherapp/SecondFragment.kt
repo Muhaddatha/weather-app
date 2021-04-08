@@ -45,9 +45,9 @@ class SecondFragment : Fragment() {
         viewModel.sendData((activity as MainActivity).resp) // Send JSON response object to MainViewModel for parsing
         Log.i("test", "data2 in SecondFragment: " + viewModel.getDailyWeather().toString())
 
-        testTextView.text = viewModel.getDailyWeather().toString()
 
-        currentWeatherBtn.setOnClickListener {// Change to MainFragment from SecondFragment on button click
+
+        currentWeatherTab.setOnClickListener {// Change to MainFragment from SecondFragment on button click
             (activity as MainActivity).changeFragment(id, "secondFragment")
         }
     } // end of onActivityCreated()

@@ -277,10 +277,11 @@
             android:id="@+id/currentWeatherButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="2dp"
-            android:text="Current Weather"
-            android:backgroundTint="@color/sky_blue"/>
+            android:layout_weight="1"
+            android:backgroundTint="@color/sky_blue"
+            android:clickable="false"
+            android:text="Current Weather" />
 
         <Button
             android:id="@+id/sevenDayWeatherButton"
