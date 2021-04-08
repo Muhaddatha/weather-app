@@ -52,7 +52,7 @@ class MainFragment : Fragment() {
         Log.i("test weatherArray in MainFragment", weatherArray?.getJSONObject(0)?.get("icon").toString())
 
         // Set GUI icon based on "icon" field in weatherArray
-        when(weatherArray?.getJSONObject(0)?.get("icon").toString()) {
+        when (weatherArray?.getJSONObject(0)?.get("icon").toString()) {
             "01d" -> iconImageView.setImageResource(R.drawable._01d)
             "01n" -> iconImageView.setImageResource(R.drawable._01n)
             "02d" -> iconImageView.setImageResource(R.drawable._02d)
@@ -73,14 +73,17 @@ class MainFragment : Fragment() {
             "50n" -> iconImageView.setImageResource(R.drawable._50n)
         }
 
-//        sevenDayTab.setOnClickListener { // Change to SecondFragment from MainFragment on button click
-//            (activity as MainActivity).changeFragment(id, "mainFragment")
-//        }
+        sevenDayWeatherButton.setOnClickListener {
+            handleSevenDayTab(it)
+        }
 
-    } // end of onActivityCreated
 
-    fun handleSevenDayTabClick(view: View) {
-        (activity as MainActivity).changeFragment(id, "mainFragment")
+    }
+
+    private fun handleSevenDayTab(view : View){
+        Log.i("test", "insideHandleSevenDayTab click event")
+        (activity as MainActivity).changeFragment(this.id, "mainFragment")
+
     }
 
 } // end of MainFragment
