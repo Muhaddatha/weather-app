@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="coral_pink">#E8665D</color>
     <color name="sky_blue">#62a5f5</color>
+    <color name="opacity_bg">#40F1EBF0</color>
 </resources>
