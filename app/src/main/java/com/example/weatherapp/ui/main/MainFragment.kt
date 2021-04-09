@@ -55,13 +55,24 @@ class MainFragment : Fragment() {
         var sunrise : Long? = currentWeather?.getLong("sunrise")
         var sunriseCopy : Long
         if(sunrise != null){
+            sunriseCopy = sunrise
+        }
+        else{
+            sunriseCopy = 1618311230
+        }
 
+        var sunset = currentWeather?.getLong("sunset")
+        var sunsetCopy : Long
+        if(sunset != null){
+            sunsetCopy = sunset
+        }else{
+            sunsetCopy = 1618359058
         }
         updatedAtTextView.text = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm: a", Locale.US).format(Date(updatedAtCopy * 1000))
         currentWeatherTextView.text = "Temperature: " + currentWeather?.get("temp").toString() + "°F"
         feelsLikeTextView.text = "Feels like: " + currentWeather?.get("feels_like").toString() + "°F"
-        sunriseTextView.text = currentWeather?.get("sunrise").toString()
-        sunsetTextView.text = currentWeather?.get("sunset").toString()
+        sunriseTextView.text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunriseCopy * 1000))
+        sunsetTextView.text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunsetCopy * 1000))
         humidityTextView.text = currentWeather?.get("humidity").toString() + "%"
         windSpeedTextView.text = currentWeather?.get("wind_speed").toString() + " mph"
 
