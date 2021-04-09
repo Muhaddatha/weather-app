@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.main
 
+import android.icu.text.SimpleDateFormat
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.example.weatherapp.R
 import kotlinx.android.synthetic.main.main_fragment.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.*
 
 class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
@@ -40,7 +42,22 @@ class MainFragment : Fragment() {
 
         // Parse JSON object and set GUI text fields
         locationTextView.text = "Location: " + (activity as MainActivity).resp?.get("timezone").toString()
-        updatedAtTextView.text = "Updated at: " + currentWeather?.get("dt").toString()
+        var updatedAt : Long? = currentWeather?.getLong("dt")
+        var updatedAtCopy : Long
+        if(updatedAt != null){
+            updatedAtCopy = updatedAt
+        }
+        else{
+            //highly unlikely that this part will run
+            updatedAtCopy = 1617987600
+        }
+
+        var sunrise : Long? = currentWeather?.getLong("sunrise")
+        var sunriseCopy : Long
+        if(sunrise != null){
+
+        }
+        updatedAtTextView.text = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm: a", Locale.US).format(Date(updatedAtCopy * 1000))
         currentWeatherTextView.text = "Temperature: " + currentWeather?.get("temp").toString() + "°F"
         feelsLikeTextView.text = "Feels like: " + currentWeather?.get("feels_like").toString() + "°F"
         sunriseTextView.text = currentWeather?.get("sunrise").toString()
