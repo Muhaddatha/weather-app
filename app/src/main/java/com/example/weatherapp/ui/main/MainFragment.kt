@@ -68,7 +68,7 @@ class MainFragment : Fragment() {
         }else{
             sunsetCopy = 1618359058
         }
-        updatedAtTextView.text = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm: a", Locale.US).format(Date(updatedAtCopy * 1000))
+        updatedAtTextView.text = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US).format(Date(updatedAtCopy * 1000))
         currentWeatherTextView.text = "Temperature: " + currentWeather?.get("temp").toString() + "°F"
         feelsLikeTextView.text = "Feels like: " + currentWeather?.get("feels_like").toString() + "°F"
         sunriseTextView.text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunriseCopy * 1000))
@@ -104,7 +104,6 @@ class MainFragment : Fragment() {
         sevenDayWeatherButton.setOnClickListener {
             handleSevenDayTab(it)
         }
-
 
     }
 
