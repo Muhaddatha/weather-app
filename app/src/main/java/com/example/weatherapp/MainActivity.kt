@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         requestQueue = Volley.newRequestQueue(this)
 
         //api url
-        val url = "https://api.openweathermap.org/data/2.5/onecall?lat=42.3314&lon=-83.0458&exclude=minutely,hourly,alerts&units=imperial&appid="
+        val url = "https://api.openweathermap.org/data/2.5/onecall?lat=42.3314&lon=-83.0458&exclude=minutely,hourly,alerts&units=imperial&appid=effd11265cd5a93848a2b781b9ed5c5c"
 
         //create object request
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
 
                     try {
                         Log.i("test", "response in MainActivity: $response")
+
+
+                        //val currentMoment: Instant = Clock.System.now()
                         resp = response // Make public copy of JSON object response
                     }
                     catch(ex : JSONException) {
