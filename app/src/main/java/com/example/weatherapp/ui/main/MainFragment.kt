@@ -58,6 +58,7 @@ class MainFragment : Fragment() {
             sunriseCopy = sunrise
         }
         else{
+            //highly unlikely that this part will run
             sunriseCopy = 1618311230
         }
 
@@ -66,6 +67,7 @@ class MainFragment : Fragment() {
         if(sunset != null){
             sunsetCopy = sunset
         }else{
+            //highly unlikely that this part will run
             sunsetCopy = 1618359058
         }
         updatedAtTextView.text = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US).format(Date(updatedAtCopy * 1000))
