@@ -43,38 +43,26 @@ class MainFragment : Fragment() {
         // Parse JSON object and set GUI text fields
         locationTextView.text = "Location: " + (activity as MainActivity).resp?.get("timezone").toString()
         var updatedAt : Long? = currentWeather?.getLong("dt")
-        var updatedAtCopy : Long
-        if(updatedAt != null){
-            updatedAtCopy = updatedAt
-        }
-        else{
-            //highly unlikely that this part will run
-            updatedAtCopy = 1617987600
-        }
 
         var sunrise : Long? = currentWeather?.getLong("sunrise")
-        var sunriseCopy : Long
-        if(sunrise != null){
-            sunriseCopy = sunrise
-        }
-        else{
-            //highly unlikely that this part will run
-            sunriseCopy = 1618311230
-        }
 
         var sunset = currentWeather?.getLong("sunset")
-        var sunsetCopy : Long
-        if(sunset != null){
-            sunsetCopy = sunset
-        }else{
-            //highly unlikely that this part will run
-            sunsetCopy = 1618359058
+
+        updatedAt?.let {
+            updatedAtTextView.text = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US).format(Date(updatedAt * 1000))
         }
-        updatedAtTextView.text = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US).format(Date(updatedAtCopy * 1000))
+
         currentWeatherTextView.text = "Temperature: " + currentWeather?.get("temp").toString() + "°F"
         feelsLikeTextView.text = "Feels like: " + currentWeather?.get("feels_like").toString() + "°F"
-        sunriseTextView.text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunriseCopy * 1000))
-        sunsetTextView.text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunsetCopy * 1000))
+
+        sunrise?.let{
+            sunriseTextView.text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunrise * 1000))
+        }
+
+        sunset?.let{
+            sunsetTextView.text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunset * 1000))
+        }
+
         humidityTextView.text = currentWeather?.get("humidity").toString() + "%"
         windSpeedTextView.text = currentWeather?.get("wind_speed").toString() + " mph"
 
